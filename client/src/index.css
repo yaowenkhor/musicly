@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: "sf-pro-regular";
+    src: url(./assets/fonts/SFPRODISPLAYREGULAR.OTF) format('opentype');
+}
+
+@font-face {
+    font-family: "sf-pro-bold";
+    src: url(./assets/fonts/SFPRODISPLAYBOLD.OTF) format('opentype');
+}

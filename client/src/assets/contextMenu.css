@@ -1,0 +1,90 @@
+.context-menu {
+  position: fixed;
+  background-color: #333333;
+  border-radius: 8px;
+  min-width: 180px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  border: 1px solid #444444;
+  z-index: 1000;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  overflow: hidden;
+}
+
+.context-menu.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.context-menu-item {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  color: #f4f4f4;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  user-select: none;
+}
+
+.context-menu-item:hover {
+  background-color: #393E46;
+}
+
+.context-menu-item svg,
+.context-menu-item .icon {
+  margin-right: 10px;
+  font-size: 18px;
+  color: #acacac;
+}
+
+.context-menu-divider {
+  height: 1px;
+  background-color: #444444;
+  margin: 5px 0;
+}
+
+.context-menu-item.danger {
+  color: #ff6b6b;
+}
+
+.context-menu-item.danger:hover {
+  background-color: rgba(255, 107, 107, 0.1);
+}
+
+.context-menu-item.danger svg,
+.context-menu-item.danger .icon {
+  color: #ff6b6b;
+}
+
+/* Animation for appearing/disappearing */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+.context-menu.fade-in {
+  animation: fadeIn 0.15s forwards;
+}
+
+.context-menu.fade-out {
+  animation: fadeOut 0.15s forwards;
+}
