@@ -19,14 +19,18 @@ const MusicCard = ({
   return (
     <article
       className="flex items-center p-4 border-b border-gray-200 cursor-pointer hover:bg-gray-300"
-      onClick={() => playTrack({ track_name, track_duration, img, artists })}
       onMouseEnter={() => setMouseOn(true)}
       onMouseLeave={() => setMouseOn(false)}
     >
       <div className="w-5 text-center">
         <span className="text-lg font-semibold">
           {mouseOn ? (
-            <PlayArrowIcon className="text-gray-700 w-6 h-6" />
+            <PlayArrowIcon
+              onClick={() =>
+                playTrack({ track_name, track_duration, img, artists })
+              }
+              className="text-gray-700 w-6 h-6"
+            />
           ) : (
             <span className="text-lg font-semibold">{number}</span>
           )}
