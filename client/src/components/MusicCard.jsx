@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import usePlayer from "../contexts/PlayerProvider";
+import { useAuth } from "../contexts/AuthProvider";
 
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { Link } from "react-router-dom";
 
 const MusicCard = ({
@@ -13,8 +15,31 @@ const MusicCard = ({
   artists,
 }) => {
   const { playTrack } = usePlayer();
+  const { user } = useAuth();
 
   const [mouseOn, setMouseOn] = useState(false);
+  const [mouseOnOptions, setMouseOnOptions] = useState(false);
+  const optionsRef = useRef(null);
+
+  function handleOptionClick() {
+    setMouseOnOptions(!mouseOnOptions);
+  }
+
+  useEffect(() => {
+    function handler(e) {
+      if (optionsRef.current) {
+        if (!optionsRef.current.contains(e.target)) {
+          setMouseOnOptions(false);
+        }
+      }
+    }
+
+    document.addEventListener("click", handler);
+
+    return () => {
+      document.removeEventListener("click", handler);
+    };
+  }, []);
 
   return (
     <article
@@ -57,9 +82,26 @@ const MusicCard = ({
           </div>
         </div>
       </div>
-      <div className="">
+      <div className="mr-1.5">
         <h5 className="text-lg font-medium">{track_duration}</h5>
       </div>
+      {user && (
+        <div className="relative" ref={optionsRef}>
+          <div
+            onClick={(e) => handleOptionClick(e)}
+            className="p-1 rounded-full hover:bg-[#939393] transition-colors duration-100"
+          >
+            <MoreHorizIcon className="text-gray-700" />
+          </div>
+          {mouseOnOptions && (
+            <ul className="absolute right-5 top-8 w-36 bg-white shadow-lg rounded-md py-1 z-10 border border-gray-200">
+              <li className="px-4 py-2 hover:bg-gray-100 text-sm cursor-pointer">
+                + Add to Playlist
+              </li>
+            </ul>
+          )}
+        </div>
+      )}
     </article>
   );
 };
