@@ -15,8 +15,9 @@ const playlistSchema = new mongoose.Schema({
       songName: String,
       songArtist: [
         {
-          artistName: String,
-          artistId: String,
+          artist_id: String,
+          artist_name: String,
+          
         },
       ],
       songImage: String,
