@@ -19,7 +19,7 @@ router.use(authenticateUser);
 router.post('/create', createPlaylist);
 router.delete('/delete/:playlistId', authorizeUser, deletePlaylist);
 router.put('/add/song/:playlistId', authorizeUser, addSongToPlaylist);
-router.delete('/delete/song/playlistId', authorizeUser, deleteSongFromPlaylist);
+router.put('/delete/song/:playlistId', authorizeUser, deleteSongFromPlaylist);
 router.get('/all', getAllPlaylist);
 router.get('/:playlistId', authorizeUser, getPlaylistDetails);
 
