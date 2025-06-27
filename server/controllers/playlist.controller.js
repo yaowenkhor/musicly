@@ -20,6 +20,19 @@ export const addSongToPlaylist = async (req, res) =>{
     try {
         const {playlistId, song} = req.body;
 
+        const playlist = await Playlist.findById(playlistId);
+        
+        const isDuplicate = playlist.playlistSongs.some(existingSong => 
+            existingSong.songID === song.songID
+        );
+        
+        if (isDuplicate) {
+            return res.status(400).json({
+            success: false, 
+            message: "This song already exists in the playlist"
+            });
+        }
+
         const updatedPlaylist = await Playlist.findByIdAndUpdate(
             playlistId,
             {$push: {playlistSongs: song}},
