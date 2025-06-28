@@ -2,34 +2,56 @@ import React, { useState, useRef, useEffect } from "react";
 import usePlayer from "../contexts/PlayerProvider";
 import { useAuth } from "../contexts/AuthProvider";
 
+import { addSongToPlaylist } from "../api/playlist";
+import toast from "react-hot-toast";
+
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { Link } from "react-router-dom";
 
 const MusicCard = ({
   number,
+  track_id,
   track_name,
   track_duration,
   type,
   img,
   artists,
+  handleDelete
 }) => {
   const { playTrack } = usePlayer();
-  const { user } = useAuth();
+  const { user, playlist } = useAuth();
 
   const [mouseOn, setMouseOn] = useState(false);
   const [mouseOnOptions, setMouseOnOptions] = useState(false);
+  const [showPlaylist, setShowPlaylist] = useState(false);
   const optionsRef = useRef(null);
 
   function handleOptionClick() {
     setMouseOnOptions(!mouseOnOptions);
+    setShowPlaylist(false);
   }
+
+  const handleAddToPlaylist = async (playlist_id, songData) => {
+    try {
+      const response = await addSongToPlaylist(playlist_id, songData);
+
+      toast.success(response.message, {
+        position: "top-center",
+      });
+    } catch (error) {
+      toast.error(error, {
+        position: "top-center",
+      });
+    }
+  };
 
   useEffect(() => {
     function handler(e) {
       if (optionsRef.current) {
         if (!optionsRef.current.contains(e.target)) {
           setMouseOnOptions(false);
+          setShowPlaylist(false);
         }
       }
     }
@@ -65,6 +87,9 @@ const MusicCard = ({
         {type === "artist" && (
           <img src={img} alt="Artist" className="w-8 h-8 rounded-sm" />
         )}
+        {type === "playlist" && (
+          <img src={img} alt="Artist" className="w-8 h-8 rounded-sm" />
+        )}
         <div className="flex flex-col justify-center items-start">
           <h5 className="text-sm font-medium">{track_name}</h5>
           <div className="flex flex-wrap items-center">
@@ -95,9 +120,40 @@ const MusicCard = ({
           </div>
           {mouseOnOptions && (
             <ul className="absolute right-5 top-8 w-36 bg-white shadow-lg rounded-md py-1 z-10 border border-gray-200">
-              <li className="px-4 py-2 hover:bg-gray-100 text-sm cursor-pointer">
+              <li
+                className="px-4 py-2 hover:bg-gray-100 text-sm cursor-pointer"
+                onClick={() => setShowPlaylist(!showPlaylist)}
+              >
                 + Add to Playlist
               </li>
+              {type == "playlist" && (
+                <li
+                  className="px-4 py-2 hover:bg-gray-100 text-sm cursor-pointer"
+                  onClick={() => handleDelete()}
+                >
+                  - Delete
+                </li>
+              )}
+            </ul>
+          )}
+          {showPlaylist && (
+            <ul className="absolute right-40 top-8 mr-1 w-36 bg-white shadow-lg rounded-md py-1 z-20 border border-gray-200">
+              {playlist.map((item) => (
+                <li
+                  key={item._id}
+                  className="px-4 py-2 hover:bg-gray-100 text-sm cursor-pointer"
+                  onClick={() =>
+                    handleAddToPlaylist(item._id, {
+                      songID: track_id,
+                      songName: track_name,
+                      songArtist: artists,
+                      songImage: img,
+                    })
+                  }
+                >
+                  {item.playlistName}
+                </li>
+              ))}
             </ul>
           )}
         </div>

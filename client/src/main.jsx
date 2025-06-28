@@ -12,6 +12,7 @@ import Artist from "./pages/Artist";
 import Search from "./pages/Search";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import Playlist from "./pages/Playlist";
 
 import "./index.css";
 import { PlayerProvider } from "./contexts/PlayerProvider";
@@ -31,6 +32,7 @@ const router = createBrowserRouter([
       { path: "album/:album_id", element: <Album /> },
       { path: "artist/:artist_id", element: <Artist /> },
       { path: "search", element: <Search /> },
+      { path: "playlist/:playlist_id", element: <Playlist />}
     ],
   },
   {

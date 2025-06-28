@@ -22,6 +22,8 @@ import { useAuth } from "../contexts/AuthProvider";
 
 import { create, deletePlaylist } from "../api/playlist";
 
+import { Link } from "react-router-dom";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -150,7 +152,6 @@ const Sidebar = () => {
   };
 
   const handleDeletePlaylist = async (playlist_id) => {
-
     const user_id = user?.id || user?._id;
     try {
       const response = await deletePlaylist(playlist_id);
@@ -260,13 +261,15 @@ const Sidebar = () => {
             <div className="h-full overflow-y-auto px-4">
               <ul className="space-y-1 pb-4">
                 {playlist.map((item) => (
-                  <li
-                    key={item._id}
-                    className="py-1.5 px-2 cursor-pointer hover:bg-[#393E46] hover:rounded-xl hover:backdrop-blur-md hover:shadow-md font-sf-pro-regular"
-                    onContextMenu={(e) => handleOnContextMenu(e, item)}
-                  >
-                    {item.playlistName}
-                  </li>
+                  <Link to={`/playlist/${item._id}`}>
+                    <li
+                      key={item._id}
+                      className="py-1.5 px-2 cursor-pointer hover:bg-[#393E46] hover:rounded-xl hover:backdrop-blur-md hover:shadow-md"
+                      onContextMenu={(e) => handleOnContextMenu(e, item)}
+                    >
+                      {item.playlistName}
+                    </li>
+                  </Link>
                 ))}
               </ul>
               <ContextMenu
