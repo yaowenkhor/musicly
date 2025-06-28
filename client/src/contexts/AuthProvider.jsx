@@ -33,8 +33,8 @@ export const AuthProvider = ({ children }) => {
         }
       } catch (error) {
         if (
-          error.response.status === 401 &&
-          error.response.data.message === "Invalid or expired access token"
+          error.status === 401 &&
+          error.message === "Invalid or expired access token"
         ) {
         const newToken = await refreshAccessToken();
         const data = await profile();
