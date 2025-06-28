@@ -67,6 +67,7 @@ const Artist = () => {
                 <MusicCard 
                     type='artist'
                     key={track.track_id}
+                    track_id={track.track_id}
                     number={index + 1}
                     img={track.images[0]?.url || 'default_images_url'}
                     track_name={track.track_name}

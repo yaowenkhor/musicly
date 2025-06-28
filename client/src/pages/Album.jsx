@@ -51,6 +51,7 @@ const Album = () => {
           <MusicCard
             type="artist"
             key={track.track_id}
+            track_id={track.track_id}
             number={index + 1}
             track_name={track.track_name}
             track_duration={track.duration}

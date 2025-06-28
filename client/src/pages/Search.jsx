@@ -109,6 +109,7 @@ const Search = () => {
           {searchResult.track.slice(0, visible).map((item, index) => (
             <MusicCard
               key={item.track_id}
+              track_id={item.track_id}
               type="artist"
               number={index + 1}
               track_name={item.track_name}
