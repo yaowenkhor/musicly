@@ -52,7 +52,7 @@ export const deleteSongFromPlaylist = async (req, res) =>{
     try {
         const {playlistId, songID} = req.body;
 
-        const deletedSong = await Playlist.findByIdAndDelete(
+        const deletedSong = await Playlist.findByIdAndUpdate(
             playlistId,
             {$pull: {playlistSongs: {songID: songID}}},
             {new: true}
