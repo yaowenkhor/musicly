@@ -99,7 +99,7 @@ const Artist = () => {
     
             <div className="grid grid-cols-5 gap-6">
                 {albums.map((album) => (
-                    <Link to={`/album/${album.album_id}`}>
+                    <Link key={album.album_id} to={`/album/${album.album_id}`}>
                         {/* Make it a component */}
                         <div key={album.album_name} className="relative group cursor-pointer">
                             <img

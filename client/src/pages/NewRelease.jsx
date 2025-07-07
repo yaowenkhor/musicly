@@ -28,7 +28,7 @@ const NewRelease = () => {
 
       <div className='grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 mt-6 overflow-y '>
         {releases.map((release)=>(
-          <Link key={release} to={`/album/${release.albums_id}`}>
+          <Link key={release.albums_id} to={`/album/${release.albums_id}`}>
             <AlbumCard 
               key={release.albums_id}
               img={release.images[0]?.url}

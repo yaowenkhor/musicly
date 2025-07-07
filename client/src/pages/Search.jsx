@@ -126,7 +126,7 @@ const Search = () => {
         </h1>
         <div className="flex flex-row overflow-hidden w-full h-auto gap-10 justify-evenly items-center">
           {searchResult.artist.slice(0, visible).map((item) => (
-            <Link to={`/artist/${item.artist_id}`}>
+            <Link key={item.artist_id} to={`/artist/${item.artist_id}`}>
               <RowDisplay
                 type="artist"
                 key={item.artist_id}
@@ -143,7 +143,7 @@ const Search = () => {
         </h1>
         <div className="flex flex-row overflow-hidden w-full h-auto gap-10 justify-evenly items-center">
           {searchResult.album.slice(0, visible).map((item) => (
-            <Link to={`/album/${item.album_id}`}>
+            <Link key={item.album_id} to={`/album/${item.album_id}`}>
               <RowDisplay
                 type="album"
                 key={item.album_id}

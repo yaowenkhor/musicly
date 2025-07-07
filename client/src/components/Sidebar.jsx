@@ -261,9 +261,8 @@ const Sidebar = () => {
             <div className="h-full overflow-y-auto px-4">
               <ul className="space-y-1 pb-4">
                 {playlist.map((item) => (
-                  <Link to={`/playlist/${item._id}`}>
+                  <Link key={item._id} to={`/playlist/${item._id}`}>
                     <li
-                      key={item._id}
                       className="py-1.5 px-2 cursor-pointer hover:bg-[#393E46] hover:rounded-xl hover:backdrop-blur-md hover:shadow-md"
                       onContextMenu={(e) => handleOnContextMenu(e, item)}
                     >
