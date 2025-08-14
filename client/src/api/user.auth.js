@@ -78,7 +78,6 @@ export const profile = async () => {
       return response.data;
     }
   } catch (error) {
-    console.error(error);
     return error.response?.message;
   }
 };
@@ -95,10 +94,6 @@ export const refresh_token = async () => {
       return response.data;
     }
   } catch (error) {
-    console.error(
-      "Error refreshing token:",
-      error.response?.data || error.message
-    );
     throw new Error(error.response?.data?.message || "Failed to refresh token");
   }
 };

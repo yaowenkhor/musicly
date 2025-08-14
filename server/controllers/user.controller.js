@@ -151,7 +151,6 @@ export const user = async (req, res) => {
       res.status(200).json({success: true ,user, accessToken });
     });
   } catch (error) {
-    console.error(error);
     res
       .status(500)
       .json({ message: "Something is wrong, server error", error: error });
