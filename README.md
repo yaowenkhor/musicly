@@ -1,6 +1,6 @@
 # 🎵 Musicly - Full Stack Music Streaming Web App
 
-Welcome to Musicly, the music streaming platform that you will love ! <br>
+Welcome to Musicly, the music streaming platform that you will love ❤️! <br>
 Built using MERN stack and powered by Spotify and Youtube APIs.
 
 ## 💡 **Why This Project?** <br>
@@ -10,7 +10,7 @@ Musicly is my Spotify-inspired passion project 🎶 — but here’s the twist:
 * Pure music streamed from YouTube  
 
 ## 🚀 Features
-* Music Searching - Search any song, artist, album (just like how you do in Spotify)
+* Music Searching - Search any song, artist, album (just like how you search in Spotify 😏)
 * Custom music player - Play any music you like
 * Playlists - Create your own playlist
 * New Releases - Browse through new release album
@@ -41,11 +41,12 @@ npm install
 Create a `.env` file in the `server` folder with:
 ````bash
 PORT=3000
-MONGO_URI=your_mongodb_uri
+URI=your_mongodb_uri
 SPOTIFY_CLIENT_ID=your_spotify_client_id
 SPOTIFY_CLIENT_SECRET=your_spotify_client_secret
 YOUTUBE_API_KEY=your_youtube_api_key
 JWT_SECRET=your_jwt_secret
+REFRESH_JWT_SECRET=your_refresh_jwt_secret
 ````
 ### 4. Run the app
 Backend:
@@ -64,6 +65,7 @@ Now open your browser and go to:
 ````bash 
 http://localhost:5173/
 ````
-### Now you can enjoy your music without any interruptions !!
+### Now you can enjoy your music without any interruptions 😀!!
+
 
 
