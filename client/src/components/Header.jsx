@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import HomeTwoToneIcon from "@mui/icons-material/HomeTwoTone";
 import Box from "@mui/material/Box";
@@ -7,10 +7,27 @@ import TextField from "@mui/material/TextField";
 import { useAuth } from "../contexts/AuthProvider";
 
 const Header = () => {
-  const [searchQuery, setSearchQuery] = useState();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [debouncedQuery, setDebouncedQuery] = useState("");
   const navigate = useNavigate();
 
   const { user, logout } = useAuth();
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedQuery(searchQuery);
+    }, 500);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [searchQuery]);
+
+  useEffect(() => {
+    if (searchQuery.trim() !== "") {
+      navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
+    }
+  }, [debouncedQuery]);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -22,6 +39,7 @@ const Header = () => {
   const handleLogout = async () => {
     try {
       await logout();
+      navigate("/discover");
     } catch (error) {
       console.log(error);
     }
@@ -84,16 +102,14 @@ const Header = () => {
         </Box>
       </div>
 
-      
-
       <div className="flex space-x-4">
         {user ? (
           <div className="flex gap-5 items-center justify-center">
             <div className="flex items-center gap-1.5">
               <img
-                src="https://s1.aptocdn.com/www.fashionchingu.com/wp-content/uploads/2023/11/Haerin-NewJeans-White-Cat-Print-Hoodie-1.jpeg"
-                alt=""
-                className="w-10 h-10 rounded-full  object-cover"
+                src="/icons8-user-48.png"
+                alt="user image"
+                className="w-10 h-10 rounded-full  object-cover border-2"
               />
               <span className="pl-1.5 text-sm font-medium">
                 {user.username}
