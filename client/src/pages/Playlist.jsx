@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 
 import MusicCard from "../components/MusicCard";
@@ -12,6 +12,8 @@ const Playlist = () => {
   const [playlist, setPlaylist] = useState();
   const [loading, setLoading] = useState(true);
   const [refreshTrigger, setRefreshTrigger] = useState(0);
+
+  const navigate = useNavigate();
 
   const deleteSong = async (playlist_id, track_id) => {
     try {
@@ -39,6 +41,9 @@ const Playlist = () => {
         toast.error(error, {
           position: "top-center",
         });
+        if(error == 'Access denied'){
+          navigate('/discover')
+        }
       } finally {
         setLoading(false);
       }
@@ -46,7 +51,7 @@ const Playlist = () => {
     fetchData();
   }, [playlist_id, refreshTrigger]);
 
-  if (loading) {
+  if (loading || !playlist) {
     return <p>Loading artist data...</p>;
   }
 
