@@ -60,7 +60,6 @@ export const AuthProvider = ({ children }) => {
       const response = await refresh_token();
       return response.accessToken;
     } catch (error) {
-      console.error("Error refreshing access token:", error.message);
       throw error;
     }
   };
