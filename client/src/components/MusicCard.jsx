@@ -85,10 +85,10 @@ const MusicCard = ({
       </div>
       <div className="flex-1 px-4 flex flex-row gap-1.5 items-center">
         {type === "artist" && (
-          <img src={img} alt="Artist" className="w-8 h-8 rounded-sm" />
+          <img src={img} alt="Artist" className="w-8 h-8 rounded-sm" loading="lazy"/>
         )}
         {type === "playlist" && (
-          <img src={img} alt="Artist" className="w-8 h-8 rounded-sm" />
+          <img src={img} alt="Artist" className="w-8 h-8 rounded-sm" loading="lazy"/>
         )}
         <div className="flex flex-col justify-center items-start">
           <h5 className="text-sm font-medium">{track_name}</h5>

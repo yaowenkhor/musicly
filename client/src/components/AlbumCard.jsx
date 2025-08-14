@@ -8,6 +8,7 @@ const AlbumCard = ({ img, albumName, albumType, totalTracks, artist }) => {
                 src={img}
                 alt={albumName}
                 className="w-40 h-40 object-cover border-4 border-black"
+                loading='lazy'
             />
 
 
